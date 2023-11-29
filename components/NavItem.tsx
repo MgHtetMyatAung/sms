@@ -14,9 +14,10 @@ export default function NavItem({
   return (
     <li>
       <Link
-        className={` block p-3 font-medium hover:bg-gray-100 hover:text-gray-800 hover:shadow-sm ${
-          isActive &&
-          "bg-blue-50 text-blue-700 shadow-sm hover:bg-blue-50 hover:text-blue-700 hover:shadow-sm"
+        className={` block p-3 ${
+          isActive
+            ? "bg-blue-50 font-medium text-blue-700 shadow-sm hover:bg-blue-50 hover:text-blue-700"
+            : "hover:bg-gray-100 hover:text-gray-800"
         }`}
         href={item.link}
       >

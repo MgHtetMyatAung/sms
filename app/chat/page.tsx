@@ -1,10 +1,10 @@
 import React from "react";
-import MentionInput from "./Chat";
+import ChatComponent from "./ChatComponent";
 
 export default function ChatPage() {
   return (
     <div>
-      <MentionInput />
+      <ChatComponent />
     </div>
   );
 }

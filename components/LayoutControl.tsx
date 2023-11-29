@@ -1,30 +1,34 @@
 "use client";
-import { AuthContext } from "@/context/AuthWrapper";
-import React, { ReactNode, useContext, useLayoutEffect } from "react";
+import React, { ReactNode, useLayoutEffect } from "react";
 import SideBar from "./SideBar";
-import { usePathname, useRouter } from "next/navigation";
 import NavBar from "./NavBar";
+import { useSession } from "next-auth/react";
+import { redirect, usePathname } from "next/navigation";
 
 export default function LayoutControl({ children }: { children: ReactNode }) {
-  const router = useRouter();
+  const { status, data } = useSession();
   const pathname = usePathname();
-  const { isAuth } = useContext(AuthContext);
-  console.log(isAuth, "auth");
-  useLayoutEffect(() => {
-    if (!isAuth && pathname !== "/login") {
-      router.push("/login");
-    }
-  }, [pathname, isAuth]);
+
+  if (status === "unauthenticated" && pathname !== "/auth/signin") {
+    redirect("/auth/signin");
+  }
+
+  if (status === "authenticated" && pathname === "/auth/signin") {
+    redirect("/");
+  }
+
+  console.log(pathname, "pathname");
+
   return (
     <>
-      {isAuth ? (
-        <div className=" grid lg:grid-cols-7 gap-2">
-          <div className=" hidden lg:block lg:col-span-1 bg-gray-50 h-screen">
+      {status === "authenticated" ? (
+        <div className=" flex gap-2">
+          <div className=" hidden lg:block lg:w-[250px] bg-gray-50 h-screen">
             <SideBar />
           </div>
-          <div className=" lg:col-span-6 bg-gray-50 h-screen">
+          <div className=" lg:flex-grow bg-gray-50 h-screen">
             <NavBar />
-            {children}
+            <section className=" lg:px-5">{children}</section>
           </div>
         </div>
       ) : (

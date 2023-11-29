@@ -1,5 +1,7 @@
 import React from "react";
 import NavItem from "./NavItem";
+import { signOut } from "next-auth/react";
+import { Button } from "@nextui-org/react";
 
 const navLists = [
   { id: 1, name: "Dashboard", link: "/" },
@@ -14,7 +16,7 @@ const navLists = [
 
 export default function SideBar() {
   return (
-    <div>
+    <div className=" relative h-screen border-dashed border-r-[1px] border-gray-300">
       <div className="px-3">
         <h2 className=" font-bold text-2xl p-3">SMS</h2>
       </div>
@@ -23,6 +25,13 @@ export default function SideBar() {
           <NavItem key={item.id} item={item} />
         ))}
       </ul>
+
+      <Button
+        className=" p-2 bg-gray-800 text-gray-50 rounded-md absolute bottom-5 left-6"
+        onClick={() => signOut()}
+      >
+        Logout
+      </Button>
     </div>
   );
 }
