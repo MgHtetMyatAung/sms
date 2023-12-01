@@ -20,7 +20,9 @@ export async function createStudent(formData: FormData) {
           revalidatePath("/students");
         }
       });
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
   console.log(
     formData.get("name"),
     formData.get("phone"),
