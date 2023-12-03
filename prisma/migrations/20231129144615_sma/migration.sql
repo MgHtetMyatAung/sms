@@ -47,7 +47,8 @@ CREATE TABLE "Student" (
     "email" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "phone" TEXT NOT NULL,
-    "seatNumber" TEXT NOT NULL
+    "seatNumber" TEXT NOT NULL,
+    "address" TEXT NOT NULL
 );
 
 -- CreateTable
