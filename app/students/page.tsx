@@ -7,7 +7,7 @@ export default async function StudentsPage() {
   console.log(students);
   return (
     <div>
-      <StudentData />
+      <StudentData datas={students} />
     </div>
   );
 }
